@@ -2,6 +2,7 @@ import express = require('express');
 import cors = require('cors');
 import path = require('path');
 import mongoose = require('mongoose');
+import BookingsRouter from './routes/bookings.routes';
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* API ENDPOINTS */
-
+app.use('/bookings', BookingsRouter);
 
 app.use(express.static(path.join(__dirname + '/public')));
 
