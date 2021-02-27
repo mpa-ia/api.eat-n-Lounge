@@ -1,10 +1,12 @@
 import express = require('express');
 import * as bookings from '../controllers/bookings.controller';
-import * as validation from '../middlewares/booking.validation';
+import validation from '../middlewares/booking.validation';
 
 const router = express.Router();
 
 router.get('/list', bookings.getAll);
-router.route('/new').post(validation.validateBookingFields, bookings.submitNew);
+router.post('/new', validation.validateBookingFields, bookings.submitNew);
+// router.delete('/cancel/:id', bookings.cancelBooking);
+// router.put('/update/:id', bookings.update);
 
 export default router;

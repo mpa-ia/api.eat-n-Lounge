@@ -8,6 +8,7 @@ export const getAll: ServerRequest = async (_req, res) => {
     const bookings = await Booking.find();
     if (!bookings) res.status(404).json({ error: true, errorCode: errorCodes.NO_RESOURCE });
     else {
+      // res.json({ status: 'success', data: bookings });
       res.json(bookings);
     }
   } catch (err) {
@@ -16,14 +17,13 @@ export const getAll: ServerRequest = async (_req, res) => {
 };
 
 export const submitNew: ServerRequest = async (req, res) => {
-    const { duration, date, table, starters, hour, people, phone, surname } = req.body as DBBooking;
-    try {
+  const { date, table, starters, hours, people, phone, surname } = req.body as DBBooking;
+  try {
         const newBooking = new Booking({
-          duration,
           date,
           table,
           starters,
-          hour,
+          hours,
           people,
           surname,
           phone

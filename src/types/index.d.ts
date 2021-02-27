@@ -3,8 +3,7 @@ import { Response, Request, NextFunction } from 'express/index';
 
 interface DBBooking extends Document {
 	date: string;
-	hour: number;
-	duration: number;
+	hours: number[];
 	people: number;
 	phone: string;
 	starters: string[];
