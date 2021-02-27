@@ -1,5 +1,5 @@
 import Booking from '../models/booking.model';
-// import mongoose = require('mongoose');
+import mongoose = require('mongoose');
 import { DBBooking, ServerRequest } from '../types';
 import { errorCodes, successCodes } from '../settings/codes';
 
@@ -16,14 +16,14 @@ export const getAll: ServerRequest = async (_req, res) => {
 };
 
 export const submitNew: ServerRequest = async (req, res) => {
-    const { duration, date, table, starters, hours, people, phone, surname } = req.body as DBBooking;
+    const { duration, date, table, starters, hour, people, phone, surname } = req.body as DBBooking;
     try {
         const newBooking = new Booking({
           duration,
           date,
           table,
           starters,
-          hours,
+          hour,
           people,
           surname,
           phone
