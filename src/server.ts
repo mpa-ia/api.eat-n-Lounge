@@ -16,6 +16,10 @@ app.use('/api/bookings', BookingsRouter);
 
 app.use(express.static(path.join(__dirname + '/public')));
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 /* MONGOOSE */
 process.env.NODE_ENV === "production" ?
   mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@${process.env.MONGODB_REMOTE_URI}`, { useNewUrlParser: true, useUnifiedTopology: true }) :
@@ -29,7 +33,7 @@ db.once('open', () => {
 db.on('error', err => console.log('Error: ' + err));
 
 /* START SERVER */
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 const server = app.listen(port, () => {
   console.log('Server is running on port: ' + port);
 });
