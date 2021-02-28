@@ -7,8 +7,8 @@ const bookingSchema = new mongoose.Schema({
   table: { type: String, required: true },
   starters: { type: Array },
   hours: { type: Array, required: true },
-  people: { type: Array, required: true },
-  phone: { type: Array, required: true },
+  people: { type: Number, required: true },
+  phone: { type: String, required: true },
 },
   { versionKey: false }
 );
