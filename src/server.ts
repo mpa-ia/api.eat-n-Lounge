@@ -1,8 +1,10 @@
 import express = require('express');
 import cors = require('cors');
 import path = require('path');
+
 import mongoose = require('mongoose');
 import BookingsRouter from './routes/bookings.routes';
+import AuthRouter from './routes/auth.routes';
 
 const app = express();
 
@@ -13,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 /* API ENDPOINTS */
 app.use('/api/bookings', BookingsRouter);
+app.use('/api/auth', AuthRouter);
 
 app.use(express.static(path.join(__dirname + '/public')));
 
