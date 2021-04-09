@@ -9,6 +9,8 @@ const bookingSchema = new mongoose.Schema({
   hours: { type: Array, required: true },
   people: { type: Number, required: true },
   phone: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref:'User' },
+
 },
   { versionKey: false }
 );

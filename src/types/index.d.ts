@@ -9,6 +9,7 @@ interface DBBooking extends Document {
 	starters: string[];
 	surname: string;
 	table: string;
+	userId?: string;
 }
 interface DBUser extends Document { 
 		email: string;

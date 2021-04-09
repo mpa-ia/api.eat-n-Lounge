@@ -16,7 +16,7 @@ export const getAll: ServerRequest = async (_req, res) => {
 };
 
 export const submitNew: ServerRequest = async (req, res) => {
-  const { date, table, starters, hours, people, phone, surname } = req.body as DBBooking;
+  const { date, table, starters, hours, people, phone, surname, userId } = req.body as DBBooking;
   try {
         const newBooking = new Booking({
           date,
@@ -25,8 +25,11 @@ export const submitNew: ServerRequest = async (req, res) => {
           hours,
           people,
           surname,
-          phone
+          phone,
         });
+        if (userId) {
+          newBooking.userId = userId;
+        }
         await newBooking.save();
         res.status(200).json({ status: 'success', code: successCodes.SUBMIT_BOOKING_SUCCESS });
     } catch (err) {
