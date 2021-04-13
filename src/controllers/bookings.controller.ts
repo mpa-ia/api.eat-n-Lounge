@@ -66,3 +66,15 @@ export const editBooking: ServerRequest = async (req, res) => {
     }
   }
 };
+export const cancelBooking: ServerRequest = async (req, res) => {
+  try {
+    Booking.findByIdAndDelete(req.params.id, undefined, (err: Error, doc: DBBooking | null): void => {
+      if (err || !doc) res.status(404).json({ error: true, errorCode: errorCodes.NO_RESOURCE });
+      else {
+        res.status(200).json({ status: 'success', actionCode: successCodes.DELETE_BOOKING_SUCCESS });
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: true, errorCode: 9999 });
+  }
+};
