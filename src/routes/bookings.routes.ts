@@ -7,6 +7,6 @@ const router = express.Router();
 router.get('/list', bookings.getAll);
 router.post('/new', validation.validateBookingFields, bookings.submitNew);
 // router.delete('/cancel/:id', bookings.cancelBooking);
-// router.put('/update/:id', bookings.update);
+router.put('/edit/:id', bookings.editBooking);
 
 export default router;
