@@ -11,10 +11,10 @@ interface DBBooking extends Document {
 	table: string;
 	userId?: string;
 }
-interface DBUser extends Document { 
-		email: string;
+interface DBUser extends Document {
+	email: string;
 	password: string;
-		name: string;
+	name: string;
 	surname: string;
 	role: number;
 }

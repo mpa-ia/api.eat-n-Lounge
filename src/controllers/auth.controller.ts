@@ -5,10 +5,10 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const signIn: ServerRequest = async (req, res) => {
-	const { email, password }  = req.body as SignInPayload;
+	const { email, password } = req.body as SignInPayload;
 	try {
-    const users = await User.find({ email });
-    if (!users.length) res.status(404).json({ error: true, errorCode: errorCodes.AUTH_NO_USER });
+		const users = await User.find({ email });
+		if (!users.length) res.status(404).json({ error: true, errorCode: errorCodes.AUTH_NO_USER });
 		else {
 			const user = users[0];
 			const validPass = await bcrypt.compare(password, user.password);
@@ -25,14 +25,14 @@ export const signIn: ServerRequest = async (req, res) => {
 					}
 				});
 			}
-    }
-  } catch (err) {
-    res.status(500).json({ error: true, errorCode: errorCodes.UNKNOWN_ERROR });
-  }
+		}
+	} catch (err) {
+		res.status(500).json({ error: true, errorCode: errorCodes.UNKNOWN_ERROR });
+	}
 };
 
 export const signUp: ServerRequest = async (req, res) => {
-  const {  name, surname, email, password, confirmPassword } = req.body as SignUpPayload;
+	const { name, surname, email, password, confirmPassword } = req.body as SignUpPayload;
 	try {
 		const users = await User.find({ email });
 		if (users.length) res.status(404).json({ error: true, errorCode: errorCodes.AUTH_USER_EXISTS });
@@ -46,7 +46,7 @@ export const signUp: ServerRequest = async (req, res) => {
 			await newUser.save();
 			res.status(200).json({ status: 'success', code: successCodes.SIGNUP_SUCCESS });
 		}
-    } catch (err) {
-      res.status(500).json({ error: true, errorCode: errorCodes.UNKNOWN_ERROR });
-    }
+	} catch (err) {
+		res.status(500).json({ error: true, errorCode: errorCodes.UNKNOWN_ERROR });
+	}
 };
