@@ -2,7 +2,7 @@ import { Document } from 'mongoose';
 import { Response, Request, NextFunction } from 'express/index';
 
 interface DBBooking extends Document {
-	date: string;
+	date: number;
 	hours: number[];
 	people: number;
 	phone: string;

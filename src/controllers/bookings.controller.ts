@@ -2,10 +2,11 @@ import Booking from '../models/booking.model';
 import mongoose = require('mongoose');
 import { DBBooking, ServerRequest } from '../types';
 import { errorCodes, successCodes } from '../settings/codes';
-
+import moment from 'moment';
 export const getAll: ServerRequest = async (_req, res) => {
   try {
-    const bookings = await Booking.find();
+    const now = moment().unix();
+    const bookings = await Booking.find({ date: { '$gt': now } });
     if (!bookings) res.status(404).json({ error: true, errorCode: errorCodes.NO_RESOURCE });
     else {
       res.json({ status: 'success', data: bookings });
